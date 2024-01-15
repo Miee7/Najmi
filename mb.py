@@ -1,63 +1,79 @@
-import numpy as np
+# Import necessary libraries
+import streamlit as st
+from PIL import Image
 import pandas as pd
-import streamlit as st 
-from sklearn import preprocessing
-import pickle
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LogisticRegression
+from sklearn.metrics import accuracy_score, classification_report
 
-model = pickle.load(open('model.pkl', 'rb'))
-encoder_dict = pickle.load(open('encoder.pkl', 'rb')) 
-cols=['age','workclass','education','marital-status','occupation','relationship','race','gender','capital-gain','capital-loss',
-      'hours-per-week','native-country']    
-  
-def main(): 
-    st.title("Income Predictor")
-    html_temp = """
-    <div style="background:#025246 ;padding:10px">
-    <h2 style="color:white;text-align:center;">Income Prediction App </h2>
-    </div>
-    """
-    st.markdown(html_temp, unsafe_allow_html = True)
-    
-    age = st.text_input("Age","0") 
-    workclass = st.selectbox("Working Class", ["Federal-gov","Local-gov","Never-worked","Private","Self-emp-inc","Self-emp-not-inc","State-gov","Without-pay"]) 
-    education = st.selectbox("Education",["10th","11th","12th","1st-4th","5th-6th","7th-8th","9th","Assoc-acdm","Assoc-voc","Bachelors","Doctorate","HS-grad","Masters","Preschool","Prof-school","Some-college"]) 
-    marital_status = st.selectbox("Marital Status",["Divorced","Married-AF-spouse","Married-civ-spouse","Married-spouse-absent","Never-married","Separated","Widowed"]) 
-    occupation = st.selectbox("Occupation",["Adm-clerical","Armed-Forces","Craft-repair","Exec-managerial","Farming-fishing","Handlers-cleaners","Machine-op-inspct","Other-service","Priv-house-serv","Prof-specialty","Protective-serv","Sales","Tech-support","Transport-moving"]) 
-    relationship = st.selectbox("Relationship",["Husband","Not-in-family","Other-relative","Own-child","Unmarried","Wife"]) 
-    race = st.selectbox("Race",["Amer Indian Eskimo","Asian Pac Islander","Black","Other","White"]) 
-    gender = st.selectbox("Gender",["Female","Male"]) 
-    capital_gain = st.text_input("Capital Gain","0") 
-    capital_loss = st.text_input("Capital Loss","0") 
-    hours_per_week = st.text_input("Hours per week","0") 
-    nativecountry = st.selectbox("Native Country",["Cambodia","Canada","China","Columbia","Cuba","Dominican Republic","Ecuador","El Salvadorr","England","France","Germany","Greece","Guatemala","Haiti","Netherlands","Honduras","HongKong","Hungary","India","Iran","Ireland","Italy","Jamaica","Japan","Laos","Mexico","Nicaragua","Outlying-US(Guam-USVI-etc)","Peru","Philippines","Poland","Portugal","Puerto-Rico","Scotland","South","Taiwan","Thailand","Trinadad&Tobago","United States","Vietnam","Yugoslavia"]) 
-    
-    if st.button("Predict"): 
-        features = [[age,workclass,education,marital_status,occupation,relationship,race,gender,capital_gain,capital_loss,hours_per_week,nativecountry]]
-        data = {'age': int(age), 'workclass': workclass, 'education': education, 'maritalstatus': marital_status, 'occupation': occupation, 'relationship': relationship, 'race': race, 'gender': gender, 'capitalgain': int(capital_gain), 'capitalloss': int(capital_loss), 'hoursperweek': int(hours_per_week), 'nativecountry': nativecountry}
-        print(data)
-        df=pd.DataFrame([list(data.values())], columns=['age','workclass','education','maritalstatus','occupation','relationship','race','gender','capitalgain','capitalloss','hoursperweek','nativecountry'])
-                
-        category_col =['workclass', 'education', 'maritalstatus', 'occupation', 'relationship', 'race', 'gender', 'nativecountry']
-        for cat in encoder_dict:
-            for col in df.columns:
-                le = preprocessing.LabelEncoder()
-                if cat == col:
-                    le.classes_ = encoder_dict[cat]
-                    for unique_item in df[col].unique():
-                        if unique_item not in le.classes_:
-                            df[col] = ['Unknown' if x == unique_item else x for x in df[col]]
-                    df[col] = le.transform(df[col])
-            
-        features_list = df.values.tolist()      
-        prediction = model.predict(features_list)
-    
-        output = int(prediction[0])
-        if output == 1:
-            text = ">50K"
+# Load employee data
+data = pd.read_csv('employee_data.csv')
+
+# Define the columns that will be used as features
+features = ['job_role', 'department', 'business_travel', 'education_field', 'marital_status', 'monthly_income', 'total_working_years', 'years_at_company', 'years_in_current_role', 'age']
+
+# Define the target column
+target = 'left_company'
+
+# Split the data into features and target
+X = data[features]
+y = data[target]
+
+# Split the data into training and testing sets
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+
+# Train a logistic regression model on the training data
+model = LogisticRegression()
+model.fit(X_train, y_train)
+
+# Define a function to predict attrition risk
+def predict_attrition(job_role, department, business_travel, education_field, marital_status, monthly_income, total_working_years, years_at_company, years_in_current_role, age):
+    input_features = pd.DataFrame([[job_role, department, business_travel, education_field, marital_status, monthly_income, total_working_years, years_at_company, years_in_current_role, age]], columns=features)
+    prediction = model.predict(input_features)
+    return prediction[0]
+
+# Define the Streamlit app
+def main():
+    # Set up the app title and image
+    st.title('Employee Attrition Predictor')
+    image = Image.open('employee.png')
+    st.image(image, width=300)
+
+    # Get user input for each feature
+    job_role = st.selectbox('Job Role', ['Sales', 'Marketing', 'Healthcare Rep', 'Human Resources'])
+    department = st.selectbox('Department', ['Sales', 'Marketing', 'Healthcare', 'Human Resources'])
+    business_travel = st.selectbox('Business Travel', ['Travel', 'Non-Travel'])
+    education_field = st.selectbox('Education Field', ['Sales', 'Marketing', 'Healthcare', 'Human Resources'])
+    marital_status = st.selectbox('Marital Status', ['Single', 'Married', 'Divorced'])
+    monthly_income = st.number_input('Monthly Income', min_value=0.0, step=100.0)
+    total_working_years = st.number_input('Total Working Years', min_value=0.0, step=1.0)
+    years_at_company = st.number_input('Years at Company', min_value=0.0, step=1.0)
+    years_in_current_role = st.number_input('Years in Current Role', min_value=0.0, step=1.0)
+    age = st.number_input('Age', min_value=0, step=1)
+
+    # Display the user input
+    st.write('')
+    st.write('**Employee Information:**')
+    st.write('')
+    st.write('Job Role:', job_role)
+    st.write('Department:', department)
+    st.write('Business Travel:', business_travel)
+    st.write('Education Field:', education_field)
+    st.write('Marital Status:', marital_status)
+    st.write('Monthly Income:', monthly_income)
+    st.write('Total Working Years:', total_working_years)
+    st.write('Years at Company:', years_at_company)
+    st.write('Years in Current Role:', years_in_current_role)
+    st.write('Age:', age)
+
+    # Predict attrition risk
+    if st.button('Predict'):
+        prediction = predict_attrition(job_role, department, business_travel, education_field, marital_status, monthly_income, total_working_years, years_at_company, years_in_current_role, age)
+        if prediction == 0:
+            st.write('**Attrition Risk:** Low')
         else:
-            text = "<=50K"
+            st.write('**Attrition Risk:** High')
 
-        st.success('Employee Income is {}'.format(text))
-      
-if __name__=='__main__': 
+# Run the Streamlit app
+if __name__ == '__main__':
     main()
