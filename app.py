@@ -42,11 +42,11 @@ def main():
 
         # One-hot encode 'JobRole', 'Department', 'BusinessTravel', and 'EducationField' columns
         encoder = OneHotEncoder(sparse=False)
-        encoded_cols = ['JobRole', 'Department', 'BusinessTravel', 'EducationField']
+        encoded_cols = ['City']
         user_df[encoded_cols] = encoder.fit_transform(user_df[encoded_cols])
 
         # Min-Max scaling for selected columns
-        columns_to_scale = ['MonthlyIncome', 'TotalWorkingYears', 'YearsAtCompany', 'EmployeeYearsInCurrentRole', 'Age']
+        columns_to_scale = ['JoiningYear', 'PaymentTier', 'ExperienceInCurrentDomain']
         scaler = MinMaxScaler()
 
         # Fit the scaler to the user input data
@@ -56,9 +56,8 @@ def main():
         user_df[columns_to_scale] = scaler.transform(user_df[columns_to_scale])
 
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['JobRole_Healthcare Repres', 'Department_Human Resources', 'BusinessTravel_Non-Travel',
-                            'EducationField_Human Resources', 'MonthlyIncome', 'TotalWorkingYears', 'YearsAtCompany',
-                            'EmployeeYearsInCurrentRole', 'Age']
+        expected_columns = ['Age', 'City_Bangalore', 'City_Pune', 'City_New Delhi', 'Education_Bachelor', 'Education_Master',
+                        'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain', 'JoiningYear', 'PaymentTier']
 
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
