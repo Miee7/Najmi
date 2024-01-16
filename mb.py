@@ -1,2 +1,6 @@
 import streamlit as st
-st.title("PREDICT FUTURE EMPLOYEE ATTRITION")
+import joblib
+
+classifier = joblib.load('grid_search.joblib')
+
+st.title("Employee Leave Prediction App")
