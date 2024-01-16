@@ -9,7 +9,7 @@ def main():
     model = joblib.load('grid_search.joblib')
 
     # Streamlit app
-    st.title('Streamlit App for Data Transformation and Prediction')
+    st.title('FUTURE EMPLOYEE ATTRITION')
 
     # User input form
     st.sidebar.header('User Input:')
