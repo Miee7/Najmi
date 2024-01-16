@@ -61,6 +61,13 @@ def main():
     st.subheader('DataFrame after Min-Max Scaling')
     st.write(user_df)
 
+    # Ensure that the columns in user_df match the columns used during model training
+    expected_columns = ['Age', 'City_Bangalore', 'City_Pune', 'City_New Delhi', 'Education_Bachelor', 'Education_Master',
+                        'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain', 'JoiningYear', 'PaymentTier']
+
+    # Align columns in user_df
+    user_df = user_df.reindex(columns=expected_columns, fill_value=0)
+
     # Make predictions using the loaded model
     prediction = model.predict(user_df)
 
@@ -70,3 +77,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
