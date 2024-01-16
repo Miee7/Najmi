@@ -63,10 +63,16 @@ def main():
 
     # Ensure that the columns in user_df match the columns used during model training
     expected_columns = ['Age', 'City_Bangalore', 'City_Pune', 'City_New Delhi', 'Education_Bachelor', 'Education_Master',
-                        'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain', 'JoiningYear', 'PaymentTier']
+                    'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain', 'JoiningYear', 'PaymentTier']
+
+    # Print and check columns in user_df
+    print("Columns in user_df:", user_df.columns)
 
     # Align columns in user_df
     user_df = user_df.reindex(columns=expected_columns, fill_value=0)
+
+    # Print columns after alignment
+    print("Columns in user_df after alignment:", user_df.columns)
 
     # Make predictions using the loaded model
     prediction = model.predict(user_df)
