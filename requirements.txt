@@ -1,4 +1,6 @@
 streamlit
-joblib
 pandas
+numpy
 scikit-learn
+joblib
+streamlit_aggrid
