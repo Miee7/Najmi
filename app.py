@@ -47,13 +47,12 @@ def main():
         user_df = pd.DataFrame(user_data)
 
         # One-hot encode categorical columns
-        categorical_cols = ['Education', 'City', 'Gender', 'EverBenched']
+        categorical_cols = ['education', 'city', 'gender', 'everbenched']
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['education_Bachelor', 'education_Master', 'joiningYear', 'city_Bangalore', 'city_Pune', 'city_New Delhi',
-                            'PaymentTier', 'age', 'gender_Female', 'gender_Male', 'everBenched_No', 'everBenched_Yes',
-                            'experienceInCurrentDomain']
+        expected_columns = ['education', 'joiningyear', 'city', 'Paymenttier', 'age', 'gender', 'everBenched',
+                            'experienceincurrentdomain']
         
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
