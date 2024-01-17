@@ -34,14 +34,14 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [education],
-            'JoiningYear': [joiningyear],
-            'City': [city],
-            'PaymentTier': [paymenttier],
-            'Age': [age],
-            'Gender': [gender],
-            'EverBenched': [everbenched],
-            'ExperienceInCurrentDomain': [experienceincurrentdomain],
+            'Education': [Education],
+            'JoiningYear': [JoiningYear],
+            'City': [City],
+            'PaymentTier': [PaymentTier],
+            'Age': [Age],
+            'Gender': [Gender],
+            'EverBenched': [EverBenched],
+            'ExperienceInCurrentDomain': [ExperienceInCurrentDomain],
         }
 
         user_df = pd.DataFrame(user_data)
