@@ -19,14 +19,14 @@ def main():
     st.markdown(html_temp, unsafe_allow_html=True)
 
     # User input form
-    Education = st.selectbox('education:', ['Bachelor', 'Master'])
-    JoiningYear = st.slider('joiningyear:', 2012, 2018, 2015)
-    City = st.selectbox('city:', ['Bangalore', 'Pune', 'New Delhi'])
-    PaymentTier = st.selectbox('Payment Tier:', [1, 2, 3])
-    Age = st.text_input("age", "0")
-    Gender = st.selectbox('gender:', ['Male', 'Female'])
-    EverBenched = st.selectbox('everbenched:', ['Yes', 'No'])
-    ExperienceInCurrentDomain = st.number_input('experienceincurrentdomain:')
+    education = st.selectbox('education:', ['Bachelor', 'Master'])
+    joiningyear = st.slider('joiningyear:', 2012, 2018, 2015)
+    city = st.selectbox('city:', ['Bangalore', 'Pune', 'New Delhi'])
+    paymenttier = st.selectbox('Payment Tier:', [1, 2, 3])
+    age = st.text_input("age", "0")
+    gender = st.selectbox('gender:', ['Male', 'Female'])
+    everbenched = st.selectbox('everbenched:', ['Yes', 'No'])
+    experienceincurrentdomain = st.number_input('experienceincurrentdomain:')
 
     user_input_form = st.form('user_input_form')
 
@@ -51,8 +51,8 @@ def main():
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['education', 'joiningyear', 'city_Bangalore', 'city_New Delhi', 'city_Pune', 'paymenttier', 'age', 'gender', 'everbenched',
-                'experienceincurrentdomain']
+        expected_columns = ['Education_Bachelor', 'Education_Master', 'JoiningYear', 'City_Bangalore', 'City_New Delhi', 'City_Pune', 'PaymentTier', 'Age', 'Gender_Female', 'Gender_Male', 'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain']
+
         
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
