@@ -62,4 +62,4 @@ def main():
         st.write('Leave: Yes' if prediction[0] == 1 else 'Leave: No')
 
     if __name__ == '_main_':
-        main()
+    main()
