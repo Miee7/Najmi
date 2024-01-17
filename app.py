@@ -19,14 +19,14 @@ def main():
     st.markdown(html_temp, unsafe_allow_html=True)
 
     # User input form
-    education = st.selectbox('Education:', ['Bachelor', 'Master'])
-    joining_year = st.slider('Joining Year:', 2012, 2018, 2015)
-    city = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
-    payment_tier = st.selectbox('Payment Tier:', [1, 2, 3])
-    age = st.text_input("Age", "0")
-    gender = st.selectbox('Gender:', ['Male', 'Female'])
-    ever_benched = st.selectbox('Ever Benched:', ['Yes', 'No'])
-    experience_in_current_domain = st.number_input('Experience in Current Domain:')
+    Education = st.selectbox('education:', ['Bachelor', 'Master'])
+    JoiningYear = st.slider('joiningyear:', 2012, 2018, 2015)
+    City = st.selectbox('city:', ['Bangalore', 'Pune', 'New Delhi'])
+    PaymentTier = st.selectbox('Payment Tier:', [1, 2, 3])
+    Age = st.text_input("age", "0")
+    Gender = st.selectbox('gender:', ['Male', 'Female'])
+    EverBenched = st.selectbox('everbenched:', ['Yes', 'No'])
+    ExperienceInCurrentDomain = st.number_input('experienceincurrentdomain:')
 
     user_input_form = st.form('user_input_form')
 
@@ -34,15 +34,15 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [Education],
-            'JoiningYear': [JoiningYear],
-            'City': [City],
-            'PaymentTier': [PaymentTier],
-            'Age': [Age],
-            'Gender': [Gender],
-            'EverBenched': [EverBenched],
-            'ExperienceInCurrentDomain': [ExperienceInCurrentDomain],
-        }
+            'Education': [education],
+            'JoiningYear': [joiningyear],
+            'City': [city],
+            'PaymentTier': [paymenttier],
+            'Age': [age],
+            'Gender': [gender],
+            'EverBenched': [everbenched],
+            'ExperienceInCurrentDomain': [experienceincurrentdomain],
+    }
 
         user_df = pd.DataFrame(user_data)
 
@@ -52,7 +52,7 @@ def main():
 
         # Ensure that the columns in user_df match the columns used during model training
         expected_columns = ['education', 'joiningyear', 'city_Bangalore', 'city_New Delhi', 'city_Pune', 'paymenttier', 'age', 'gender', 'everbenched',
-                    'experienceincurrentdomain']
+                'experienceincurrentdomain']
         
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
@@ -63,6 +63,6 @@ def main():
         # Display prediction
         st.subheader('Prediction:')
         st.write('Leave: Yes' if prediction[0] == 1 else 'Leave: No')
-
-if __name__=='__main__': 
+        
+if _name_ == '_main_':
     main()
