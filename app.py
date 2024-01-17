@@ -40,8 +40,14 @@ def main():
     st.subheader('User Input DataFrame')
     st.write(user_df)
 
+    # Print and check columns in user_df before one-hot encoding
+    print("Columns in user_df before one-hot encoding:", user_df.columns)
+
     # One-hot encode 'City' column
     user_df = pd.get_dummies(user_df, columns=['City'])
+
+    # Print and check columns in user_df after one-hot encoding
+    print("Columns in user_df after one-hot encoding:", user_df.columns)
 
     # Display DataFrame after one-hot encoding
     st.subheader('DataFrame after One-Hot Encoding')
