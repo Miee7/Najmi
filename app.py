@@ -2,11 +2,10 @@ import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 import joblib  # Assuming your model is saved using joblib
-import pickle
+
 
 model = joblib.load('grid_search.joblib')
-model = pickle.load(open('model.pkl', 'rb'))
-encoder_dict = pickle.load(open('encoder.pkl', 'rb')) 
+encoder_dict = joblib.load('encoder.joblib')
 
 # Define columns
 cols = ['Education', 'JoiningYear', 'City', 'PaymentTier', 'Age', 'Gender', 'EverBenched', 'ExperienceInCurrentDomain']
