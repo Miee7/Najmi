@@ -35,13 +35,13 @@ def main():
         # Create DataFrame from user input
         user_data = {
             'Education': [education],
-            'JoiningYear': [joining_year],
+            'JoiningYear': [joiningyear],
             'City': [city],
-            'PaymentTier': [payment_tier],
+            'PaymentTier': [paymenttier],
             'Age': [age],
             'Gender': [gender],
-            'EverBenched': [ever_benched],
-            'ExperienceInCurrentDomain': [experience_in_current_domain],
+            'EverBenched': [everbenched],
+            'ExperienceInCurrentDomain': [experiencein_current_domain],
         }
 
         user_df = pd.DataFrame(user_data)
