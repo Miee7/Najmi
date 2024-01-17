@@ -34,7 +34,7 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [Education],
+            'Education': [education],
             'JoiningYear': [Joining_Year],
             'City': [City],
             'PaymentTier': [Payment_Tier],
