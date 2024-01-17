@@ -7,28 +7,30 @@ import pickle
 model = joblib.load('grid_search.joblib')
 model = pickle.load(open('model.pkl', 'rb'))
 encoder_dict = pickle.load(open('encoder.pkl', 'rb')) 
-    cols = ['Education', 'JoiningYear', 'City', 'PaymentTier', 'Age', 'Gender', 'EverBenched', 'ExperienceInCurrentDomain']
+
+# Define columns
+cols = ['Education', 'JoiningYear', 'City', 'PaymentTier', 'Age', 'Gender', 'EverBenched', 'ExperienceInCurrentDomain']
 
 def main():
     st.title('FUTURE EMPLOYEE ATTRITION')
-    tml_temp = """
+    html_temp = """
     <div style="background:#025246 ;padding:10px">
     <h2 style="color:white;text-align:center;">Income Prediction App </h2>
     </div>
     """
-    st.markdown(html_temp, unsafe_allow_html = True)
+    st.markdown(html_temp, unsafe_allow_html=True)
 
     # User input form
     education = st.selectbox('Education:', ['Bachelor', 'Master'])
     joining_year = st.slider('Joining Year:', 2012, 2018, 2015)
     city = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
     payment_tier = st.selectbox('Payment Tier:', [1, 2, 3])
-    age = st.text_input("Age":"0")
+    age = st.text_input("Age", "0")
     gender = st.selectbox('Gender:', ['Male', 'Female'])
     ever_benched = st.selectbox('Ever Benched:', ['Yes', 'No'])
     experience_in_current_domain = st.number_input('Experience in Current Domain:')
 
-   user_input_form = st.form('user_input_form')
+    user_input_form = st.form('user_input_form')
     for key, value in input_options.items():
         setattr(user_input_form, key, user_input_form.text_input(key, value))
 
