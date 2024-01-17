@@ -34,14 +34,14 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [education],
-            'JoiningYear': [joining_year],
-            'City': [city],
-            'PaymentTier': [payment_tier],
-            'Age': [age],
-            'Gender': [gender],
-            'EverBenched': [ever_benched],
-            'ExperienceInCurrentDomain': [experience_in_current_domain],
+            'Education': [Education],
+            'JoiningYear': [Joining_Year],
+            'City': [City],
+            'PaymentTier': [Payment_Tier],
+            'Age': [Age],
+            'Gender': [Gender],
+            'EverBenched': [Ever_Benched],
+            'ExperienceInCurrentDomain': [Experience_In_Current_Domain],
         }
 
         user_df = pd.DataFrame(user_data)
@@ -51,8 +51,8 @@ def main():
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['Education', 'JoiningYear', 'City_Bangalore', 'City_New Delhi', 'City_Pune', 'PaymentTier', 'Age', 'Gender', 'EverBenched',
-                    'ExperienceInCurrentDomain']
+        expected_columns = ['education', 'joiningyyear', 'city_Bangalore', 'city_New Delhi', 'city_Pune', 'paymenttier', 'age', 'gender', 'everbenched',
+                    'experienceincurrentdomain']
         
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
