@@ -51,7 +51,7 @@ def main():
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['Education_Bachelor', 'Education_Master', 'JoiningYear', 'City_Bangalore', 'City_New Delhi', 'City_Pune', 'PaymentTier', 'Age', 'Gender_Female', 'Gender_Male', 'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain']
+        expected_columns = ['education_Bachelor', 'education_Master', 'joiningyear', 'city_Bangalore', 'city_New Delhi', 'city_Pune', 'paymenttier', 'age', 'gender_Female', 'gender_Male', 'everbenched_No', 'everbenched_Yes', 'experienceincurrentdomain']
 
         
         # Align columns in user_df
