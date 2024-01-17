@@ -19,14 +19,14 @@ def main():
     st.markdown(html_temp, unsafe_allow_html=True)
 
     # User input form
-    Education = st.selectbox('Education:', ['Bachelor', 'Master'])
-    JoiningYear = st.slider('Joining Year:', 2012, 2018, 2015)
-    City = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
+    Education = st.selectbox('education:', ['Bachelor', 'Master'])
+    JoiningYear = st.slider('joiningyear:', 2012, 2018, 2015)
+    City = st.selectbox('city:', ['Bangalore', 'Pune', 'New Delhi'])
     PaymentTier = st.selectbox('Payment Tier:', [1, 2, 3])
-    Age = st.text_input("Age", "0")
-    Gender = st.selectbox('Gender:', ['Male', 'Female'])
-    EverBenched = st.selectbox('Ever Benched:', ['Yes', 'No'])
-    ExperienceInCurrentDomain = st.number_input('Experience in Current Domain:')
+    Age = st.text_input("age", "0")
+    Gender = st.selectbox('gender:', ['Male', 'Female'])
+    EverBenched = st.selectbox('everbenched:', ['Yes', 'No'])
+    ExperienceInCurrentDomain = st.number_input('experienceincurrentdomain:')
 
     user_input_form = st.form('user_input_form')
 
