@@ -41,7 +41,7 @@ def main():
             'Age': [age],
             'Gender': [gender],
             'EverBenched': [everbenched],
-            'ExperienceInCurrentDomain': [experiencein_current_domain],
+            'ExperienceInCurrentDomain': [experienceincurrentdomain],
         }
 
         user_df = pd.DataFrame(user_data)
