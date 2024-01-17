@@ -50,11 +50,8 @@ def main():
         categorical_cols = ['Education', 'City', 'Gender', 'EverBenched']
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
-        # Additional preprocessing steps if needed
-        # ...
-
         # Ensure that the columns in user_df match the columns used during model training
-        expected_columns = ['Education_Bachelor', 'Education_Master', 'JoiningYear', 'City_Bangalore', 'City_Pune', 'City_New Delhi',
+        expected_columns = ['Education_Bachelor', 'Education_Master', 'JoiningYear', 'city_Bangalore', 'city_Pune', 'city_New Delhi',
                             'PaymentTier', 'Age', 'Gender_Female', 'Gender_Male', 'EverBenched_No', 'EverBenched_Yes',
                             'ExperienceInCurrentDomain']
         
