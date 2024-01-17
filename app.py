@@ -34,15 +34,15 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [Education],
-            'JoiningYear': [JoiningYear],
-            'City': [City],
-            'PaymentTier': [PaymentTier],
-            'Age': [Age],
-            'Gender': [Gender],
-            'EverBenched': [EverBenched],
-            'ExperienceInCurrentDomain': [ExperienceInCurrentDomain],
-        }
+            'Education': [education],
+            'JoiningYear': [joiningyear],
+            'City': [city],
+            'PaymentTier': [paymenttier],
+            'Age': [age],
+            'Gender': [gender],
+            'EverBenched': [everbenched],
+            'ExperienceInCurrentDomain': [experienceincurrentdomain],
+    }
 
         user_df = pd.DataFrame(user_data)
 
@@ -52,7 +52,7 @@ def main():
 
         # Ensure that the columns in user_df match the columns used during model training
         expected_columns = ['education', 'joiningyear', 'city_Bangalore', 'city_New Delhi', 'city_Pune', 'paymenttier', 'age', 'gender', 'everbenched',
-                    'experienceincurrentdomain']
+                'experienceincurrentdomain']
         
         # Align columns in user_df
         user_df = user_df.reindex(columns=expected_columns, fill_value=0)
