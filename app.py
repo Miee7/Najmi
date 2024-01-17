@@ -20,13 +20,13 @@ def main():
 
     # User input form
     education = st.selectbox('Education:', ['Bachelor', 'Master'])
-    joining_year = st.slider('Joining Year:', 2012, 2018, 2015)
+    joiningyear = st.slider('Joining Year:', 2012, 2018, 2015)
     city = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
-    payment_tier = st.selectbox('Payment Tier:', [1, 2, 3])
+    paymenttier = st.selectbox('Payment Tier:', [1, 2, 3])
     age = st.text_input("Age", "0")
     gender = st.selectbox('Gender:', ['Male', 'Female'])
-    ever_benched = st.selectbox('Ever Benched:', ['Yes', 'No'])
-    experience_in_current_domain = st.number_input('Experience in Current Domain:')
+    everbenched = st.selectbox('Ever Benched:', ['Yes', 'No'])
+    experienceincurrentdomain = st.number_input('Experience in Current Domain:')
 
     user_input_form = st.form('user_input_form')
 
@@ -34,14 +34,14 @@ def main():
     if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
         user_data = {
-            'Education': [Education],
-            'JoiningYear': [JoiningYear],
-            'City': [City],
-            'PaymentTier': [PaymentTier],
-            'Age': [Age],
-            'Gender': [Gender],
-            'EverBenched': [EverBenched],
-            'ExperienceInCurrentDomain': [ExperienceInCurrentDomain],
+            'Education': [education],
+            'JoiningYear': [joiningyear],
+            'City': [city],
+            'PaymentTier': [paymenttier],
+            'Age': [age],
+            'Gender': [gender],
+            'EverBenched': [everbenched],
+            'ExperienceInCurrentDomain': [experienceincurrentdomain],
         }
 
         user_df = pd.DataFrame(user_data)
