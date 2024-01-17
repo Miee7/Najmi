@@ -13,7 +13,7 @@ def main():
     st.title('FUTURE EMPLOYEE ATTRITION')
     html_temp = """
     <div style="background:#025246 ;padding:10px">
-    <h2 style="color:white;text-align:center;">Income Prediction App </h2>
+    <h2 style="color:white;text-align:center;">NAJMI & MAS</h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
