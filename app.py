@@ -3,7 +3,6 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder, MinMaxScaler
 import joblib  # Assuming your model is saved using joblib
 
-
 model = joblib.load('grid_search.joblib')
 encoder_dict = joblib.load('encoder.joblib')
 
@@ -30,20 +29,29 @@ def main():
     experience_in_current_domain = st.number_input('Experience in Current Domain:')
 
     user_input_form = st.form('user_input_form')
-    additional_inputs = ['AdditionalInput1', 'AdditionalInput2']
-    for input_name in additional_inputs:
-        setattr(user_input_form, input_name, user_input_form.text_input(input_name, f"Enter {input_name}"))
 
     # Submit button
-   if user_input_form.form_submit_button('Predict'):
-       
+    if user_input_form.form_submit_button('Predict'):
         # Create DataFrame from user input
-        user_data = {key: [getattr(user_input_form, key)] for key in additional_inputs}
+        user_data = {
+            'Education': [education],
+            'JoiningYear': [joining_year],
+            'City': [city],
+            'PaymentTier': [payment_tier],
+            'Age': [age],
+            'Gender': [gender],
+            'EverBenched': [ever_benched],
+            'ExperienceInCurrentDomain': [experience_in_current_domain],
+        }
+
         user_df = pd.DataFrame(user_data)
 
         # One-hot encode categorical columns
         categorical_cols = ['Education', 'City', 'Gender', 'EverBenched']
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
+
+        # Additional preprocessing steps if needed
+        # ...
 
         # Ensure that the columns in user_df match the columns used during model training
         expected_columns = ['Education_Bachelor', 'Education_Master', 'JoiningYear', 'City_Bangalore', 'City_Pune', 'City_New Delhi',
@@ -59,3 +67,6 @@ def main():
         # Display prediction
         st.subheader('Prediction:')
         st.write('Leave: Yes' if prediction[0] == 1 else 'Leave: No')
+
+if __name__=='__main__': 
+    main()
