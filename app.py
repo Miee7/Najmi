@@ -13,20 +13,20 @@ def main():
     st.title('FUTURE EMPLOYEE ATTRITION')
     html_temp = """
     <div style="background:#025246 ;padding:10px">
-    <h2 style="color:white;text-align:center;">MAS & NAJMI</h2>
+    <h2 style="color:white;text-align:center;">FUTURE EMPLOYEE ATTRITION PRIDICTION</h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
 
     # User input form
-    Education = st.selectbox('Education:', ['Bachelor', 'Master'])
-    JoiningYear = st.slider('JoiningYear:', 2012, 2018, 2015)
-    City = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
-    PaymentTier = st.selectbox('Payment Tier:', [1, 2, 3])
-    Age = st.text_input("Age", "0")
-    Gender = st.selectbox('Gender:', ['Male', 'Female'])
-    EverBenched = st.selectbox('EverBenched:', ['Yes', 'No'])
-    ExperienceInCurrentDomain = st.number_input('ExperienceInCurrentDomain:')
+    education = st.selectbox('Education:', ['Bachelor', 'Master'])
+    joiningyear = st.slider('JoiningYear:', 2012, 2018, 2015)
+    city = st.selectbox('City:', ['Bangalore', 'Pune', 'New Delhi'])
+    paymenttier = st.selectbox('Payment Tier:', [1, 2, 3])
+    age = st.text_input("Age", "0")
+    gender = st.selectbox('Gender:', ['Male', 'Female'])
+    everbenched = st.selectbox('EverBenched:', ['Yes', 'No'])
+    experienceincurrentdomain = st.number_input('ExperienceInCurrentDomain:')
 
     user_input_form = st.form('user_input_form')
 
