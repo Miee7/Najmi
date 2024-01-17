@@ -47,7 +47,7 @@ def main():
         user_df = pd.DataFrame(user_data)
 
         # One-hot encode categorical columns
-        categorical_cols = ['education', 'city', 'gender', 'everbenched']
+        categorical_cols = ['Education', 'City', 'Gender', 'EverBenched']
         user_df = pd.get_dummies(user_df, columns=categorical_cols)
 
         # Ensure that the columns in user_df match the columns used during model training
