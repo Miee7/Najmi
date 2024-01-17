@@ -66,7 +66,7 @@ def main():
                     'EverBenched_No', 'EverBenched_Yes', 'ExperienceInCurrentDomain', 'JoiningYear', 'PaymentTier']
 
     # Print and check columns in user_df
-    print("Columns in user_df:", user_df.columns)
+    print("Columns in user_df before alignment:", user_df.columns)
 
     # Align columns in user_df
     user_df = user_df.reindex(columns=expected_columns, fill_value=0)
