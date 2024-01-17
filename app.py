@@ -13,7 +13,7 @@ def main():
     st.title('FUTURE EMPLOYEE ATTRITION')
     html_temp = """
     <div style="background:#025246 ;padding:10px">
-    <h2 style="color:white;text-align:center;">Income Prediction App </h2>
+    <h2 style="color:white;text-align:center;">MAS & NAJMI</h2>
     </div>
     """
     st.markdown(html_temp, unsafe_allow_html=True)
@@ -64,5 +64,5 @@ def main():
         st.subheader('Prediction:')
         st.write('Leave: Yes' if prediction[0] == 1 else 'Leave: No')
         
-if _ _name_ _ == '_ _main_ _':
+if __name__ == '__main__':
     main()
