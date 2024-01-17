@@ -63,6 +63,3 @@ def main():
         # Display prediction
         st.subheader('Prediction:')
         st.write('Leave: Yes' if prediction[0] == 1 else 'Leave: No')
-
-if __name__=='__main__': 
-    main()
